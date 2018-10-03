@@ -1,10 +1,63 @@
 \documentclass[12pt]{scrbook}
 
-\title{Test}
-\author{test} 
+\usepackage{mdframed}
+\usepackage{anyfontsize}
+\usepackage{adjustbox}
+\usepackage{graphicx}
+
+% \newcommand{\orlymedia}{\includegraphics[scale=.08]{images/orly.png} {\Large\sffamily ORLY}}
+\newcommand{\sbsmedia}{{\Large\sffamily Story Byte Studios}}
+
+
+
+\mdfdefinestyle{l3style}{%
+leftmargin=0pt,
+backgroundcolor=black,
+fontcolor=white,
+linewidth=0pt,
+innertopmargin=20pt,
+innerbottommargin=20pt,
+innerleftmargin=20pt,
+font={\fontsize{50}{40}\selectfont}
+}
 
 \begin{document}
 
-\maketitle
+\pagestyle{empty}
+
+
+\vspace{5em}
+
+\begin{flushleft}
+\includegraphics[scale=.88]{images/darkknight.png}
+\end{flushleft}
+
+
+
+%\vspace{-2.5em}
+
+{\noindent\Large\emph{Programming}}\vspace{-0.3em}
+
+\begin{mdframed}[style=l3style]
+Role-Playing Games \par
+\hspace{-.2cm}in Python
+\end{mdframed}
+
+\vspace{1em}
+
+
+\begin{adjustbox}{minipage=.3\textwidth,right}
+\Large\em
+Geert-Jan Kruijff
+\end{adjustbox}
+
+\vfill
+
+\sbsmedia
+
+\tableofcontents 
+
+
+\include{ch_introduction}
 
 \end{document}

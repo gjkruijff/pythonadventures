@@ -107,8 +107,37 @@ command = input("> ")
 print("Boo!")
 \end{lstlisting}
 
-When you run the code, what happens is that the game prints the description, and then shows a prompt "$>$ " 
-   
+Now let's run the code. We need a Terminal for that, and fortunately we can do that right here in \emph{Atom}. In the menu bar, click on \emph{View}. This gives you a drop-down menu, where all the way at the bottom there is a \emph{Terminal $\blacktriangleright$} option. Click on \emph{Terminal}, and then select \emph{New Terminal Window}. A new tab called \texttt{terminal} appears next to you code tab. 
+
+Go to the \texttt{terminal} tab, and start your program:  
+
+\begin{verbatim}
+% python p1ch1-pythonadventure.py
+\end{verbatim}
+
+Voila! As you may have expected, your program prints ("tells") the beginning of the story -- just like a Game Master ... 
+
+\begin{verbatim}
+% python p1ch1-pythonadventure.py
+You are in a dark, spooky house, all alone out in the forest.
+There is only one door to the outside, and it is locked.
+You hear strange, creaky sounds.
+What do you do?
+>
+\end{verbatim} 
+
+And there, after the introduction, is a prompt $>$ waiting for you to say what you want to do. What would \emph{you} do? Go ahead, type it in, press \emph{Enter}. 
+
+\begin{verbatim}
+> look around
+Boo!
+% 
+\end{verbatim}
+
+The excitement never ends! In the next chapter you learn how you can do something with what the player typed in -- you may have already noticed the bit "\texttt{command = }" in line 5 in your code ...   
+
+
+
    
    
    

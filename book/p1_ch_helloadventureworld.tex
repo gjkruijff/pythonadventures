@@ -85,14 +85,10 @@ Type in the following lines of code in the editor. The line numbers below reflec
 \pagebreak
 
 \begin{lstlisting}
-1. print("You are in a dark, spooky house, all alone out in the forest.")
 print("You are in a dark, spooky house, all alone out in the forest.")
 print("There is only one door to the outside, and it is locked.")
 print("You hear strange, creaky sounds.")
-print("What do you do?")
-command = input("> ") 
 \end{lstlisting}
-
 
 Once you have entered the code, and save it in the project directory as \emph{p1ch1-pythonadventure.py}. In the Project panel the file now appears, and \texttt{git} has also spotted that there is something now! Notice that our file is listed under "Unstaged changes." Before \texttt{git} puts something into the repository, you need to "stage" it. Click on "Stage all" to move your file to the "stage." Then, in the \emph{Commit message} you should type a simple and short description of what is new or different in the file(s) you have staged. Right now this is simple: "everything is new!" Next, push the \emph{Commit} button. Because our repository is empty, the button says "Commit detached." Push the button, to make your first commit to the repository. Well done!
 
@@ -100,16 +96,21 @@ Once you have entered the code, and save it in the project directory as \emph{p1
 The Commit button now says "Commit to master." The \emph{master} is the main archive. People often visualize the archive as a tree, where the main archive is the "trunk," from which you can also create "branches." A branch initially diverges from the trunk, allowing you to try things out without these experiments ending up in the main archive. This can be handy: If we decide the experiments are no good, we cut the branch and no harm is done to the main archive. If instead we decide that all is great, then we can merge the branch with the trunk to have the main archive reflect all the changes we made.      \expend 
 \end{Exp}
  
- 
- 
-Stage all, 
-write something in the commit window, 
-Push button to Commit detached
-(Later this goes directly to Master) 
+\section{Letting the Player Do Something}
 
+So the player finds himself (of herself) in a dark, spooky house. Now what ? How can we let the player do something? Most games nowadays let you move around a character in the world using a mouse, a gamepad, or a keyboard. Here, we let the user type in what he wants to do, just like players in a role-playing game like \emph{Dungeons \& Dragons} would tell the Game Master what their character is doing next! 
 
+Type in the code below, right after the lines you just typed in. 
 
+\begin{lstlisting}[firstnumber=last]
+command = input("> ")
+print("Boo!")
+\end{lstlisting}
 
+When you run the code, what happens is that the game prints the description, and then shows a prompt "$>$ " 
+   
+   
+   
    
    
    

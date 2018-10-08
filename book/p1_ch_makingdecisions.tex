@@ -263,7 +263,7 @@ One new thing in the code above is the use of the \texttt{and} operator. Whereas
 Look at line 62. Is the second condition \texttt{ghostPresent == False} needed? How about the statement \texttt{ghostPresent == True} in line 66?\footnote{The answer: Look at what the player must have done to arrive at line 62. He must have attacked the ghost first. That means that there is no need to check, as we know that the ghost is gone. Something similar holds for line 66. We know that the player has not attacked the ghost, so the ghost must still be there. Again, we do not need to check for the condition, as there is only one possible value for \texttt{ghostPresent} at that point. However, if the code would support the player to perform these actions in any order, then these conditions are of course necessary!}   
 \end{Exe}  
 
-
+That's it. Make sure to stage and commit the code to \texttt{git} (cudos if you have been doing that after each step!), and run the adventure. If you stick to the right order, it is definitely fun to play! But, yes, indeed, there is room for improvement. In the next chapter, we look at bringing in the required flexibility, and we will complete the story.  
 
 
 

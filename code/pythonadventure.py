@@ -65,4 +65,13 @@ if (command == "go north"):
                 print("You respond with a questionable 'Boo?!' ")
                 print("The ghost disappears, whispering 'the kitchen, danger...'.")
                 ghostPresent = False
-                     
+                command = input("> ")
+                if (command == "take sword" and ghostPresent == False):
+                    print("You reach up to the sword, and take it.")
+                    print("Be careful not to cut your fingers, as it is sharp.")
+                    hasSword = True
+            if (command == "take sword" and ghostPresent == True):
+                print("As you try to reach thru the ghost, to reach the sword,")
+                print("She turns into a frighteningly old lady, flies through you,"
+                print("and covers you in sticky ectoplasmic goo.")
+                print("The ghost is still floating around, muttering angrily.")

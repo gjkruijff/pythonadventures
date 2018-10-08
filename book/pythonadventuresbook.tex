@@ -33,10 +33,7 @@
   tabsize=3
 }
 
-
-
 \newcommand{\sbsmedia}{{\Large\sffamily Story Byte Studios}}
-
 
 \mdfdefinestyle{l3style}{%
 leftmargin=0pt,
@@ -49,6 +46,8 @@ innerleftmargin=20pt,
 font={\fontsize{50}{40}\selectfont}
 }
 
+%% ENVIRONMENTS =====================
+
 \theorembodyfont{\rmfamily}
 \theoremheaderfont{\scshape}
 \newtheorem{Exp}{Expert}
@@ -60,6 +59,10 @@ font={\fontsize{50}{40}\selectfont}
 
 \include{indexterms}
 \makeindex
+
+%% REFERENCES ======================
+
+\newcommand{\figref}[1]{Figure \ref{#1}}
 
 
 %% DOCUMENT =========================

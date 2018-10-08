@@ -2,7 +2,7 @@
 
 \section{Introduction} 
 
-At the end of the previous chapter we saw how we could get the user to type something in, and then advance the story. In this chapter, we explore this further. We start with the user simply pressing \emph{Enter} to advance the story, just like turning a page. Then, we look at \textit{variables}, and particularly \textit{String} variables that can hold text. We use a variable to pick up what the player just typed in -- remember \texttt{command}? Once we have that, we inspect what the player wants to do (e.g. look around, or go south) and drive the story forward accordingly. For that, you learn more about the \texttt{if..then..else} control structure in Python, and basic String comparison \texttt{==}. By the end of the chapter, we will have a game where the player can roam around various rooms in the house, look around, and find all manner of horrific things ... 
+At the end of the previous chapter we saw how we could get the user to type something in, and then advance the story. In this chapter, we explore this further. We start with the user simply pressing \emph{Enter} to advance the story, just like turning a page. Then, we look at \textit{variables}, for example \textit{String} variables that can hold text. We use a variable to pick up what the player just typed in -- remember \texttt{command}? Once we have that, we inspect what the player wants to do (e.g. look around, or go south) and drive the story forward accordingly. For that, you learn more about the \texttt{if..then..else} control structure in Python, and basic String comparison \texttt{==}. By the end of the chapter, we will have a game where the player can roam around various rooms in the house, look around, and find all manner of horrific things ... 
 
 \section{The Story So Far} 
 
@@ -16,8 +16,29 @@ So far, the story is that you are in "a dark, spooky house, all alone out in the
   \begin{Gmd}[Game mechanics and events] A \textit{\gamemechanic} defines how the game works. It is a rule we implement in code, determining what a player can do. If the player does "this," then "that" is going to happen. For example, many games use the \emph{A} button on the (Xbox) controller to make your character jump. That is a mechanic. Or, in text adventures, you type in a command -- that is another mechanic. When you are playing a game, you use these mechanics to make things, \textit{\event{s}}, happen. Things may go one way or the other, depending on what you decide to do. Take again \emph{Dark Souls} -- as the monster attacks you, do you press \emph{L1} to raise your shield and block the attack, or do you use your left stick and \emph{O} to roll to the side? Different mechanics, allowing you to take different actions, resulting in different ways in which the game might play out ...   \expend
   \end{Gmd}
   
-Let's use that to work out our story a little bit more. The \victorycondition\ is to get out of the house but only door outside is locked. Let's assume that that means the player needs to find a key. As the game wouldn't be particularly exciting if the key would be laying there right in front of the player's nose, we need some \gamemechanic{s} for the user to go around the house, and look for objects. And that should, of course, lead to some "interesting" events ...  
+Let's use that to work out our story a little bit more. The \victorycondition\ is to get out of the house but the only door outside is locked. Let's assume that that means the player needs to find a key. As the game wouldn't be particularly exciting if the key would be laying there right in front of the player's nose, we need some \gamemechanic{s} for the user to go around the house, and look for objects. And that should, of course, lead to some "interesting" events ...  
 
+\begin{figure}[h]
+\centerline{\includegraphics[scale=.70]{images/p1ch2-hauntedhousemap.png}}
+\caption{The Haunted House In The Forest}\label{fig:hauntedhousemap}
+\end{figure}
+
+\figref{fig:hauntedhousemap} shows the map of the house. The black and grey triangles indicate doors. Grey means these doors are open, black means that door is closed -- the player needs to find the right keys to open them! The player can find the key to the \emph{Library} in the \emph{Parlour}. The key to the door outside is in a handbag in the \emph{Kitchen}. 
+
+Now, this would not be a scary story if there would not be any monsters around ... So let's place a Ghoul in the kitchen, to guard the Key To Outside. This is going to be our \emph{Boss Fight}! 
+
+We should not allow the user to simply waltz into the kitchen, completely ignore the Ghoul, and just grab the key. No -- if the player does that, "You Died!" Instead the player needs to find a weapon to defeat the Ghoul. The Library is a good place for that. We can put a sword above the mantelpiece. 
+
+Those are our key objects: the key to get into the Library (found in the Parlour), the sword to kill the Ghoul (found in the Library), and the key to get out of the house . The player can find that final key in a handbag in the Kitchen. To spice things up, we can let the Ghoul carry the handbag around its neck.  
+
+We now have our locations, our objects, a monster -- what we need now still is define what the player can do. We have objects, so a player should be able to \textbf{take} an object -- "take sword" or "pick up key." We are not going to place these objects in plain sight, as that would be to easy. The player should \textbf{search} -- "search room" or "look in handbag." Finally, the player needs to be able to get around the house. We can do that "old school"-style using \textbf{go} with a compass direction -- "go north", "go south." From the Hallway you can go North to the Parlour, or South to the Dining Room, etcetera.
+
+ 
+
+      
+
+
+ 
 
 
 

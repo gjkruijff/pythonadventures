@@ -23,7 +23,7 @@ Let's use that to work out our story a little bit more. The \victorycondition\ i
 \caption{The Haunted House In The Forest}\label{fig:hauntedhousemap}
 \end{figure}
 
-\figref{fig:hauntedhousemap} shows the map of the house. The black and grey triangles indicate doors. Grey means these doors are open, black means that door is closed -- the player needs to find the right keys to open it. The player can find the key to the \emph{Library} in the \emph{Parlour}. The key to the door outside is in a handbag in the \emph{Kitchen}. 
+\figref{fig:hauntedhousemap} shows the map of the house. The black and grey triangles indicate doors. Grey means the door is open, black means that door is closed. The player needs to find the right key to open a closed door. The player can find the key to the \emph{Library} in the \emph{Parlour}. The key to the door outside is in a handbag in the \emph{Kitchen}. 
 
 Now, this would not be a scary story if there would not be any monsters around ... So let's place a Ghoul in the kitchen, to guard the Key To Outside. This is going to be our \emph{Boss Fight}! 
 
@@ -89,28 +89,77 @@ Try this out in \texttt{idle}. Type in \texttt{score = 0}. You have zero points!
 If all you want to do is add a number to the current value of an \integer\ variable, and assign the result again to that variable, (like we did above), then Python has a shortcut for that. Instead of \texttt{score = score + 100} you can also use the short-cut \texttt{score += 100}. \expend
 \end{Exp} 
  
-A \boolean\ variable is a variable that is either \texttt{True} or \texttt{False}. 
+A \boolean\ variable is a variable that is either \texttt{True} or \texttt{False}. We can use such variables to track whether the player has certain items. Does the player have the sword? The main key? At the beginning -- none of that, so we set all those variables to \texttt{False}. 
 
-\begin{Exp}[Flags] 
-Sometimes we call such \boolean\ variables "\flag{s}"  A flag variable is a variable you define to have one value until some condition is true, in which case you change the variable's value. For example, \texttt{hasSword = False} until the player has taken the sword in the Library -- then it becomes \texttt{True}.  It is a variable you can use to control the flow of a function or statement, allowing you to check for certain conditions. So, only once it is the case that \texttt{hasSword = True}, the player can attack the Ghoul and stand a chance to survive that encounter. \expend
-\end{Exp} 
+We often call such \boolean\ variables "\flag{s}"  A flag variable is a variable you define to have one value until some condition is true, in which case you change the variable's value. For example, \texttt{hasSword = False} until the player has taken the sword in the Library -- then it becomes \texttt{True}.  It is a variable you can use to control the flow of a function or statement, allowing you to check for certain conditions. So, only once it is the case that \texttt{hasSword = True}, the player can attack the Ghoul and stand a chance to survive that encounter. 
 
+Type in the code below, before the first \texttt{print} line. Something new: Lines 1 and 6 start with \texttt{\#}. This indicates a comment; Python happily ignores those lines. Note that you do not need to retype all the print statements; the full code listing is included for illustration. 
 
+\begin{lstlisting}
+# Initialize flags 
+hasMainKey = False 
+hasHandbag = False
+hasSword = False 
+hasLibraryKey = False 
+# The story begins -- the Hallway
+print("You are in a dark, spooky house, all alone out in the forest.")
+print("There is only one door to the outside, and it is locked.")
+print("You hear strange, creaky sounds.")
+command = input("> ")
+\end{lstlisting}
 
+What is the first thing that the player might do in such a situation, other than scream "lemme out!?!"? Well, either of two things. Either the player indeed says "help," or something like "look around." If the player says "help", we can help him (or her) out by saying some soothing words, and briefly explain what actions can be performed. Type in the code below. After the code we explain what this new \texttt{if..} construction means.   
 
+\begin{lstlisting}[firstnumber=last]
+if (command == "help"):
+    print("Don't be scared. You can do a couple of things:")
+    print("- 'go' in a compass direction, e.g. 'go south' ")
+    print("- 'search' to 'search room', or look into an object")
+    print("- 'attack' to attack a monster")
+    print("- 'take' an object, e.g. 'take key' ")
+\end{lstlisting}
 
- 
+The \texttt{if} statement in line 11 is a check. If the player typed in \textit{help}, then do whatever comes after the \texttt{:} -- in this case, several print statements. For Python it is very important that the block of code that should be executed, is properly \textit{indented}. As you can see, the \texttt{print} statements do not begin at the same position as the \texttt{if} position, but a little further. Atom does this automatically. 
 
+Another thing you may notice is that we use a double "==" and not a single "=" to make a check. This is important, and makes all the difference. A single "=" \emph{assigns} a value to a variable -- a statement \texttt{score = 10} assigns the value 10 to the variable \texttt{score}. A double "==" compares the value of the variable, to the value provided. So, \texttt{score == 10} is a check whether the score is 10 (or not) -- or, as in line 11, we check whether the player's command was "help."   
 
+\begin{Exp}[Single or double quotes?] 
+Finally, once we are talking about things you may be noticing: When you used \texttt{idle} to check the value of a \strvar\ variable, the value was returned with single quotes, e.g. \texttt{'help'}. But now, line 11 is using double quotes -- \texttt{"help"}! Why, what is the difference? Simple answer: There is no difference. You can use double quotes or single quotes, and to Python it is all the same. In general, we use double quotes here, and in lines 12 through 16 you also see we are using single quotes inside double quotes ... not a problem. \expend 
+\end{Exp}
 
+The following code provides the player with more details about the Hallway, should he be looking around. Looking at the map in \figref{fig:hauntedhousemap} (on p.\pageref{fig:hauntedhousemap}) again, we see that the player has several possibilities. 
 
+\begin{lstlisting}[firstnumber=last]
+ if (command == "look around"):
+    print("You find yourself in the hallway.")
+    print("To the east is a winding staircase, on the verge of collapse.")
+    print("To the west is the door to the outside.")
+    print("You can go north, and south.")
+\end{lstlisting}
 
+Before we let the player go to the Parlour, let's handle the case where somebody is really scared and desperately wants to get out of this house as fast as possible. What if the player says \texttt{go west}? Well, if the player has the main key -- fine, go ahead, you win. But if not ... So what we need to do, after checking whether the command is \texttt{go west}, is what the status of our \texttt{hasMainKey} flag is. No key? No exit. 
 
- 
+\begin{lstlisting}[firstnumber=last]
+if (command == "go west"):
+    if (hasMainKey == True) :
+        print("You have escaped the house! You can breathe easy now.")
+    else:
+        print("The door is locked. You need a key...")
+\end{lstlisting}
 
- 
+Line 23 checks whether the player has the key. If that is the case (\texttt{hasMainKey == True}), then the player wins. If that is \emph{not} the case, then we get to the \emph{else} statement in line 25. Note that this other case means \texttt{hasMainKey} is \texttt{False}, as a \boolean\ can only have one of these two values. The player is informed that he cannot go ("oh nooooo.....") but he does get a little hint: go look for the key ... 
 
+\begin{Exe}
+Run the program in the terminal. Type in a command. What happens, after you have typed in the command? \expend
+\end{Exe}
+
+(In case you read this already without doing the exercise first -- no cheats or shortcuts!) Indeed. After you have typed in a command (help, look around, go west), the program ends. That's not much of an adventure of course, so we should change that. Add another statement \texttt{command = input("> ")} at the end of the long \texttt{print} blocks for "help" and "look around", and at the end of the "else" block (after line 26). Make sure to use the right indentation!  
       
+\begin{Exe}
+Run the program in the terminal. Type "help." After that, try "look around." Does that work? Now try "go west." What happens if you \emph{now} type in "look around"? Can you explain why?\footnote{The answer: We go step-by-step through the program, and in this program you cannot go back. So once you are passed "look around" the only next step you can take is "go west" as the program no longer checks for "help." Not great, indeed, but it's a start. Later on we will see how to do better.} \expend
+\end{Exe}
+
+It's time to get the player moving around. First, we go north, to the Parlour. There the player can find the key to the Library, and once we are in the Library, there is a Ghost to deal with before the player can then take the sword ... 
 
 
  

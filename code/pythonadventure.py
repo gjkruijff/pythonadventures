@@ -56,9 +56,10 @@ if (command == "go north"):
             print("It is floating in front of a sword, hanging above the mantelpiece.")
             command = input("> ")
             ghostPresent = True
-            if (command == "look around" or "search room"):
+            if (command == "look around" or command == "search room"):
                 print("What are you doing?! There is a ghost flying around!")
-            if (command == "attack" or "attack ghost"):
+                command = input("> ")
+            if (command == "attack" or command == "attack ghost"):
                 print("You slowly walk towards the ghost.")
                 print("The ghost appears to be reading a book.")
                 print("As you approach, she looks towards you, about to say 'Shh!'")
@@ -72,6 +73,6 @@ if (command == "go north"):
                     hasSword = True
             if (command == "take sword" and ghostPresent == True):
                 print("As you try to reach thru the ghost, to reach the sword,")
-                print("She turns into a frighteningly old lady, flies through you,"
+                print("She turns into a frighteningly old lady, flies through you,")
                 print("and covers you in sticky ectoplasmic goo.")
                 print("The ghost is still floating around, muttering angrily.")

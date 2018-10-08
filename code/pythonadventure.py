@@ -1,0 +1,47 @@
+# Initialize flags
+hasMainKey = False
+hasHandbag = False
+hasSword = False
+hasLibraryKey = False
+# The story begins -- the Hallway
+print("You are in a dark, spooky house, all alone out in the forest.")
+print("There is only one door to the outside, and it is locked.")
+print("You hear strange, creaky sounds.")
+command = input("> ")
+
+if (command == "help"):
+    print("Don't be scared. You can do a couple of things:")
+    print("- 'go' in a compass direction, e.g. 'go south' ")
+    print("- 'search' to 'search room', or look into an object")
+    print("- 'attack' to attack a monster")
+    print("- 'take' an object, e.g. 'take key' ")
+    command = input("> ")
+
+if (command == "look around"):
+    print("You find yourself in the hallway.")
+    print("To the east is a winding staircase, on the verge of collapse.")
+    print("To the west is the door to the outside.")
+    print("You can go north, and south.")
+    command = input("> ")
+
+if (command == "go west"):
+    if (hasMainKey == True) :
+        print("You have escaped the house! You can breathe easy now.")
+    else:
+        print("The door is locked. You need a key...")
+        command = input("> ")
+
+if (command == "go north"):
+    print("You go through the door, into the Parlour.")
+    print("Heavy curtains cover most of the windows. ")
+    print("It smells dusty here.")
+    print("There is a door to the west, which appears locked.")
+    command = input("> ")
+    if (command == "look around" or command == "search room"):
+        print("In the faint light, you see several chairs, and a coffee table.")
+        print("A key is laying on the coffee table.")
+        command = input("> ")
+    if (command == "take key"):
+        hasLibraryKey = True
+        print("You found the key to the library!")
+        command = input("> ")

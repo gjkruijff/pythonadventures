@@ -161,8 +161,43 @@ Run the program in the terminal. Type "help." After that, try "look around." Doe
 
 It's time to get the player moving around. First, we go north, to the Parlour. There the player can find the key to the Library, and once we are in the Library, there is a Ghost to deal with before the player can then take the sword ... 
 
-
+\begin{lstlisting}[firstnumber=last]
+if (command == "go north"):
+    print("You go through the door, into the Parlour.")
+    print("Heavy curtains cover most of the windows. ")
+    print("It smells dusty here.")
+    print("There is a door to the west, which appears locked.")
+    command = input("> ")
+    if (command == "look around" or command == "search room"):
+        print("In the faint light, you see several chairs, and a coffee table.")
+        print("A key is laying on the coffee table.")
+        command = input("> ")
+    if (command == "take key"):
+        hasLibraryKey = True
+        print("You found the key to the library!")
+        command = input("> ")
+\end{lstlisting}
  
+Once you have typed in the code above, let's have a closer look. 
+
+First of all, notice the \texttt{or} in line 33. This means: if the player typed in \emph{either} "look around" \emph{or} "search room", execute the block of code after that. So we offer the player a little bit of flexibility here in how he can phrase what he wants to do. 
+
+\begin{Exe}
+If you like, you can go back and change the code in line 17, to match line 33. \expend 
+\end{Exe}
+
+Another thing is that we are starting to change our flags. Assuming the player has seen there is a key, and then decided to "take key" we can now set the flag \texttt{hasLibraryKey} to \texttt{True}. 
+
+Alright, so now the player has the key to the library. If the player now says, "go west" -- no problem. Or, if the player has not looked around so far, and thus does not know there is a key to pick up, then "go west" should not take him into the Library. Just like we saw in line 23, we can check our flags, and handle that too. 
+
+Or so it seems ... but first things first. 
+
+
+
+
+
+
+
 
 
 

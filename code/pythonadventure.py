@@ -55,3 +55,14 @@ if (command == "go north"):
             print("In other words, there is a ghost.")
             print("It is floating in front of a sword, hanging above the mantelpiece.")
             command = input("> ")
+            ghostPresent = True
+            if (command == "look around" or "search room"):
+                print("What are you doing?! There is a ghost flying around!")
+            if (command == "attack" or "attack ghost"):
+                print("You slowly walk towards the ghost.")
+                print("The ghost appears to be reading a book.")
+                print("As you approach, she looks towards you, about to say 'Shh!'")
+                print("You respond with a questionable 'Boo?!' ")
+                print("The ghost disappears, whispering 'the kitchen, danger...'.")
+                ghostPresent = False
+                     

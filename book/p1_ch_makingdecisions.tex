@@ -215,9 +215,53 @@ It often happens that you start programming, and as you go along, you find out t
 
 Still. Although we know now that this is not the way to go, we can still go and extend our code a little bit. There is still a Library to explore, and more importantly, there is a Ghost to scare away. 
 
+\begin{lstlisting}[firstnumber=41]
+    if (command == "go west"):
+        if (hasLibraryKey == False):
+            print("The door to the library is locked.")
+            print("You need the key to the library to open the door.")
+        else:
+            print("You unlock the door, and enter the Library.")
+            print("You immediately notice the free floating full torso vaporous apparition.")
+            print("In other words, there is a ghost.")
+            print("It is floating in front of a sword, hanging above the mantelpiece.")
+            command = input("> ")
+            ghostPresent = True
+            if (command == "look around" or "search room"):
+                print("What are you doing?! There is a ghost flying around!")
+            if (command == "attack" or "attack ghost"):
+                print("You slowly walk towards the ghost.")
+                print("The ghost appears to be reading a book.")
+                print("As you approach, she looks towards you, about to say 'Shh!'")
+                print("You respond with a questionable 'Boo?!' ")
+                print("The ghost disappears, whispering 'the kitchen, danger...'.")
+                ghostPresent = False
+\end{lstlisting}
 
+Just for the purpose of this individual scene, we introduce a \emph{local} variable called \texttt{ghostPresent}. It simply tracks whether the ghost is still here, or not. We initialize it in line 51 to \texttt{True} is the ghost is in the Library when we enter. Only once we have chased it away, with a rather feeble "Boo?!" at that, we set it to \texttt{False} (line 60). If the player now tries to take sword, all is fine. If the ghost however is still there, see what happens. 
 
+\begin{lstlisting}[firstnumber=59]
+                print("The ghost disappears, whispering 'the kitchen, danger...'.")
+                ghostPresent = False
+                command = input("> ")
+                if (command == "take sword" and ghostPresent == False):
+                    print("You reach up to the sword, and take it.")
+                    print("Be careful not to cut your fingers, as it is sharp.")
+                    hasSword = True
+            if (command == "take sword" and ghostPresent == True):
+                print("As you try to reach thru the ghost, to reach the sword,")
+                print("She turns into a frighteningly old lady, flies through you,"
+                print("and covers you in sticky ectoplasmic goo.")
+                print("The ghost is still floating around, muttering angrily.")
+\end{lstlisting} 
 
+The code listing above repeats a bit of the previous code, to make sure it is clear how to indent the code. The first "take sword" block is \emph{within} the overall "attack" block, whereas the second "take sword" block is indented at the \emph{same} level as "attack" block. In other words, if you immediately go and grab the sword without attack the ghost first, you will get slimed (rather than get the sword). 
+
+One new thing in the code above is the use of the \texttt{and} operator. Whereas \texttt{or} indicates that one of the conditions for the \texttt{if} must be true, the \texttt{and} indicates that they must \emph{all} be true. 
+
+\begin{Exe} 
+Look at line 62. Is the second condition \texttt{ghostPresent == False} needed? How about the statement \texttt{ghostPresent == True} in line 66?\footnote{The answer: Look at what the player must have done to arrive at line 62. He must have attacked the ghost first. That means that there is no need to check, as we know that the ghost is gone. Something similar holds for line 66. We know that the player has not attacked the ghost, so the ghost must still be there. Again, we do not need to check for the condition, as there is only one possible value for \texttt{ghostPresent} at that point. However, if the code would support the player to perform these actions in any order, then these conditions are of course necessary!}   
+\end{Exe}  
 
 
 

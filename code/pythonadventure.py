@@ -45,3 +45,13 @@ if (command == "go north"):
         hasLibraryKey = True
         print("You found the key to the library!")
         command = input("> ")
+    if (command == "go west"):
+        if (hasLibraryKey == False):
+            print("The door to the library is locked.")
+            print("You need the key to the library to open the door.")
+        else:
+            print("You unlock the door, and enter the Library.")
+            print("You immediately notice the free floating full torso vaporous apparition.")
+            print("In other words, there is a ghost.")
+            print("It is floating in front of a sword, hanging above the mantelpiece.")
+            command = input("> ")

@@ -155,7 +155,7 @@ Run the program in the terminal. Type in a command. What happens, after you have
 
 (In case you read this already without doing the exercise first -- no cheats or shortcuts!) Indeed. After you have typed in a command (help, look around, go west), the program ends. That's not much of an adventure of course, so we should change that. Add another statement \texttt{command = input("> ")} at the end of the long \texttt{print} blocks for "help" and "look around", and at the end of the "else" block (after line 26). Make sure to use the right indentation!  
       
-\begin{Exe}
+\begin{Exe}\label{exe:fixedorder}
 Run the program in the terminal. Type "help." After that, try "look around." Does that work? Now try "go west." What happens if you \emph{now} type in "look around"? Can you explain why?\footnote{The answer: We go step-by-step through the program, and in this program you cannot go back. So once you are passed "look around" the only next step you can take is "go west" as the program no longer checks for "help." Not great, indeed, but it's a start. Later on we will see how to do better.} \expend
 \end{Exe}
 
@@ -183,14 +183,39 @@ Once you have typed in the code above, let's have a closer look.
 First of all, notice the \texttt{or} in line 33. This means: if the player typed in \emph{either} "look around" \emph{or} "search room", execute the block of code after that. So we offer the player a little bit of flexibility here in how he can phrase what he wants to do. 
 
 \begin{Exe}
-If you like, you can go back and change the code in line 17, to match line 33. \expend 
+If you like, go back and change the code in line 17, to match line 33. \expend 
 \end{Exe}
 
 Another thing is that we are starting to change our flags. Assuming the player has seen there is a key, and then decided to "take key" we can now set the flag \texttt{hasLibraryKey} to \texttt{True}. 
 
 Alright, so now the player has the key to the library. If the player now says, "go west" -- no problem. Or, if the player has not looked around so far, and thus does not know there is a key to pick up, then "go west" should not take him into the Library. Just like we saw in line 23, we can check our flags, and handle that too. 
 
-Or so it seems ... but first things first. 
+Or so it seems ... but first things first. After the block for taking the key, add the following. Make sure that the indentation is at the same level as the \texttt{if}-statements for looking around, and taking the key. 
+
+\begin{lstlisting}[firstnumber=last]
+if (command == "go west"):
+        if (hasLibraryKey == False):
+            print("The door to the library is locked.")
+            print("You need the key to the library to open the door.")
+        else:
+            print("You unlock the door, and enter the Library")
+\end{lstlisting}
+
+\begin{Exe}
+Do you already see the problem that we are running into? See also \exeref{exe:fixedorder}. \expend
+\end{Exe}
+
+Everything is fine as long as the player takes the steps exactly in the order as we programmed them. Look around, take stuff, go somewhere. But, oooh, what if the player does things in another order? The program is going to be messy -- "spaghetti code" as that's sometimes called. If we handle everything in a very strict, linear fashion ("on rails") then we need to take care of every possible order in which the player might be doing something. Suffice to say that that's not a good way to do it. 
+
+So why did we do it that way then in the first place? Well, to show you what it is like. Understand the problem, and then in the next chapter, we discuss how to properly solve it!
+
+\begin{Exp}[Refactoring] 
+It often happens that you start programming, and as you go along, you find out that your solution is not quite what it should be. Even though there are local improvements you can still make, you probably realize that ultimately this particular implementation is a dead-end. And that is fine! You have learnt an important lesson -- how \emph{not} to do. Now what you can do is take the pieces of code that you are happy with, and put them together in a different, better way. We call that \emph{refactoring your code}. Remove the spaghetti and the bad ideas, take what is good, then build a new and better solution. \expend    
+\end{Exp} 
+
+Still. Although we know now that this is not the way to go, we can still go and extend our code a little bit. There is still a Library to explore, and more importantly, there is a Ghost to scare away. 
+
+
 
 
 

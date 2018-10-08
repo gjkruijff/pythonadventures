@@ -1,0 +1,24 @@
+\chapter{Making Decisions} 
+
+\section{Introduction} 
+
+At the end of the previous chapter we saw how we could get the user to type something in, and then advance the story. In this chapter, we explore this further. We start with the user simply pressing \emph{Enter} to advance the story, just like turning a page. Then, we look at \textit{variables}, and particularly \textit{String} variables that can hold text. We use a variable to pick up what the player just typed in -- remember \texttt{command}? Once we have that, we inspect what the player wants to do (e.g. look around, or go south) and drive the story forward accordingly. For that, you learn more about the \texttt{if..then..else} control structure in Python, and basic String comparison \texttt{==}. By the end of the chapter, we will have a game where the player can roam around various rooms in the house, look around, and find all manner of horrific things ... 
+
+\section{The Story So Far} 
+
+So far, the story is that you are in "a dark, spooky house, all alone out in the forest." Scary thing is, you are inside -- and you cannot get out! Whereas, hearing strange noises, getting out is clearly what you want ... 
+
+ \begin{Gmd}[Victory condition] Most games have a \textit{\victorycondition}: What you need to achieve to win the game. Collect all the little shiny boxes, like in \emph{Fez}, or defeat all the monsters, like in \emph{Dark Souls}, or free the princess in \emph{Super Mario}. (Not all games have apparent victory conditions, for example look at an exploration game like \emph{Dear Esther}.) Key is of course that the player has some idea about what the victory condition might be. In our story, the first few lines already make it clear: Escape! Which then turns into the question, how ....  \expend  
+  \end{Gmd} 
+  
+  Having some idea about what you need to achieve is good, but even better is knowing \emph{how} you can achieve it! This is where \gamemechanic{s} and \event{s} come into play (literally).   
+      
+  \begin{Gmd}[Game mechanics and events] A \textit{\gamemechanic} defines how the game works. It is a rule we implement in code, determining what a player can do. If the player does "this," then "that" is going to happen. For example, many games use the \emph{A} button on the (Xbox) controller to make your character jump. That is a mechanic. Or, in text adventures, you type in a command -- that is another mechanic. When you are playing a game, you use these mechanics to make things, \textit{\event{s}}, happen. Things may go one way or the other, depending on what you decide to do. Take again \emph{Dark Souls} -- as the monster attacks you, do you press \emph{L1} to raise your shield and block the attack, or do you use your left stick and \emph{O} to roll to the side? Different mechanics, allowing you to take different actions, resulting in different ways in which the game might play out ...   \expend
+  \end{Gmd}
+  
+Let's use that to work out our story a little bit more. The \victorycondition\ is to get out of the house but only door outside is locked. Let's assume that that means the player needs to find a key. As the game wouldn't be particularly exciting if the key would be laying there right in front of the player's nose, we need some \gamemechanic{s} for the user to go around the house, and look for objects. And that should, of course, lead to some "interesting" events ...  
+
+
+
+
+  

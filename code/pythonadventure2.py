@@ -21,10 +21,9 @@ def showHelp():
     print("- 'take' an object, e.g. 'take key' ")
 
 # Introduction
-print("-------------------------------------------------------------")
+print("=============================================================")
 print("The Haunted House On The Hill")
-print("(v2.0)")
-print("-------------------------------------------------------------")
+print("(v2.0 -- a stupendous Story Byte Studios production)")
 
 # Main loop - as long as the player is alive, and has not escaped, continue
 while (isAlive == True and hasEscaped == False):
@@ -59,6 +58,8 @@ while (isAlive == True and hasEscaped == False):
                     print("With a dry click, and then a creaking sound, the door opens.")
                     print("You are greated by a gale, slashing ice-cold rain on your face,")
                     print("but at least you can leave this forsaken place.")
+                    print("\nYOU WIN.")
+                    print("\nTHE END (in case you hadn't figured that one out yet.)")
                     hasEscaped = True
                     isEntering = True
                 else:

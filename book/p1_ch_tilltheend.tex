@@ -272,10 +272,65 @@ You can already run the code, and see for yourself what happens when you try to 
 
 The code for the Parlour should look familiar by now. The only challenge is the door to the library. The player needs to find out that there is a key (e.g. "look around"), then take it (e.g. "take key"). Once the player has taken the key, we set the flag \texttt{hasLibraryKey} to \texttt{True}. After that, the player can go to the Library. 
 
-The Library  
+\begin{lstlisting}[firstnumber=last]
+    # Library
+    if (room == "Library"):
+        if (isEntering):
+            print("You unlock the door, and enter the Library.")
+            print("You immediately notice the free floating full torso vaporous apparition.")
+            print("In other words, there is a ghost.")
+            print("It is floating in front of a sword, hanging above the mantelpiece.")
+            ghostPresent = True
+            isEntering = False
+        # Loop within the room, as long as player is not leaving, and alive
+        while (isAlive == True and isEntering == False):
+            command = input("> ")
+            if (command == "go north"):
+                print("You cannot go north.")
+                print("The wall seems pretty solid.")
+                if (ghostPresent): print("Moreover, there is a ghost in the room!")
+            if (command == "go south"):
+                print("You cannot go south.")
+                print("There are rows upon rows of books")
+                if (ghostPresent): print("Moreover, there is still a ghost in the room!")
+            if (command == "go east"):
+                print("What looks like a door to the east is just a dark mirror.")
+                print("Slightly unsettled, you withdraw.")
+                if (ghostPresent): print("And then there is still that ghost!")
+            if (command == "go west"):
+                room = "Parlour"
+                isEntering = True
+            if (command == "look around" or command == "search room"):
+                print("The room is covered wall to wall with bookshelves.")
+                print("And the bookshelves have a lot of books.")
+                print("In the middle of one wall, there is a fireplace.")
+                print("Your attention is drawn to the sword hanging over the mantelpiece.")
+                if (ghostPresent): print("There is a ghost reading a book, and sighing.")
+            if (command == ("attack ghost")):
+                print("You slowly walk towards the ghost.")
+                print("As you approach, she looks towards you, about to say 'Shh!'")
+                print("You respond with a questionable 'Boo?!' ")
+                print("The ghost disappears, whispering 'the kitchen, danger...'.")
+                ghostPresent = False
+            if (command == "take sword"):
+                if (ghostPresent == False):
+                    print("You reach up to the sword, and take it.")
+                    print("Be careful not to cut your fingers, as it is sharp.")
+                    hasSword = True
+                else:
+                    print("As you try to reach thru the ghost, to reach the sword,")
+                    print("She turns into a frighteningly old lady, flies through you,")
+                    print("and covers you in sticky ectoplasmic goo.")
+                    print("The ghost is still floating around, muttering angrily.")
+                    print("Needless to say, you do not have the sword.")
+            if (command == "help") : showHelp()
+        # End while for Library
+    # End if checking whether Library
+\end{lstlisting} 
 
+\noindent{The} code for the Library has a bit more to it. As we have a monster here (a ghost), we introduce a flag \texttt{ghostPresent} in line 120 to track its presence. As long as the ghost is there, the player cannot take the sword (see below). Moreover, the game kindly reminds the player that there \emph{is} (still) a ghost whenever he looks around, or tries going in some direction other than back to the Parlour (see lines 128, 132, 136, and 145).   
 
-
+The only way to get rid of the ghost is to attack it. The attack is handled in the block in lines 146 through 151. The player character isn't much of a hero, but it scares the ghost away, meaning we can now set \texttt{ghostPresent} to \texttt{False} (line 151). 
 
 
 

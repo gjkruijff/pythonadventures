@@ -42,18 +42,117 @@ Strictly speaking, you \emph{can} escape an infinite loop using a \breakloop\ st
 \begin{lstlisting}
 while True: 
       # do something
-      # if the conditions are right:
-      		break  
+      if (the right conditions): break  
 \end{lstlisting}  
 
-
-
-
+Sometimes you may have too many different conditions to check. Sometimes, it may be that "depending on the situation..." you want to have sometimes these, sometimes those conditions drive the decision whether to stop looping or not. When you need to check for such \emph{local} conditions, (rather than a few \emph{global} conditions like \texttt{isAlive == True}, then an infinite loop with suitable \breakloop{s} may be a better solution. \expend 
 \end{Exp}  
 
+Another useful loop construction is the \forloop-loop.  
+
+\begin{lstlisting}
+for <something> in <object>: 
+      #do something  
+\end{lstlisting}  
+
+A \forloop-loop in Python cycles over \emph{something}'s from some \emph{object}. For example, imagine that we model the player inventory as a list of items \texttt{["sword", "library key", "handbag"]}. If the player then asks, "what do I have," you can use a \forloop\ to go through the list, and print one after other. 
+
+\begin{lstlisting}
+playerInventory = ["sword", "library key", "handbag"]
+for item in playerInventory: 
+      print(item, end=', ')
+\end{lstlisting}  
+
+\begin{Exe}
+Type in the code above, and run it. Change the \texttt{end} bit into \texttt{end='--'} and run again. What if you completely remove the \texttt{end} part, (and the comma before it)? \expend  
+\end{Exe}
+
+\section{Restructuring Our Code} 
+
+Now let us get started with our new-and-improved code. Best you create a new file, and save it under any name you like.
+
+We begin with setting up our flags. Like before we use a small set of flags to track \emph{player inventory}, e.g. \texttt{hasMainKey}. And, to control our loop conditions, we also introduce a number of \emph{player status} flags.   
+
+\begin{lstlisting}
+# Python Adventure v2.0
+
+# Initialize player inventory flags
+hasMainKey = False
+hasHandbag = False
+hasSword = False
+hasLibraryKey = False
+
+# Initialize player status flags
+isAlive = True
+hasEscaped = False
+isEntering = True
+room = "Hallway"
+\end{lstlisting}  
+
+The flags \texttt{isAlive} and \texttt{hasEscaped} should be clear by now. We will come to \texttt{isEntering} and the \texttt{room} variable in a minute. 
+
+Let us first set up the function for "help." As we said before, a player should be able to ask for help at any point in the adventure, but we don't want to have to repeat typing the help text every time. Instead, we can make a function call. 
+
+We define a function using the \pythondef\ keyword. After that keyword comes a list of parameters, but as our function is not going to take any, we leave that aside for the moment. 
+
+\begin{lstlisting}[firstnumber=last]
+# Function to show the help text
+def showHelp():
+    print("Don't be scared. You can do a couple of things:")
+    print("- 'go' in a compass direction, e.g. 'go south' ")
+    print("- 'search' to 'search room', or look into an object")
+    print("- 'attack' to attack a monster")
+    print("- 'take' an object, e.g. 'take key' ")
+\end{lstlisting}
+
+Whenever the player now types in "help", all we have to do is call this function, and the help text is shown! 
+
+\begin{verbatim}
+if (command == "help") : showHelp()
+\end{verbatim}
+
+Time to start defining our \whileloop{s}. If you look at our adventure, there are essentially two loops. 
+
+One is the main loop: continue the adventure while the player (character) is alive, and he has not escaped yet. 
+
+The second is loop is \emph{when the player is in a room}. Think about it for a moment --  why a loop? Well, one way to approach that question is by looking at the trouble we ran into. It became difficult to allow the player to perform actions in any order. And it became difficult to then deal with moving to other rooms. 
+
+Now imagine that whenever a player is in a room, you loop. In that loop, you handle whatever action the player wants to perform. You \emph{escape} that loop when the player moves to another room -- where a similar loop then begins again. Get it? Let us look at the basic structure of the code, and then all will become clear. 
+
+\begin{lstlisting}[firstnumber=last]
+# Main loop - as long as the player is alive, and has not escaped, continue
+while (isAlive == True and hasEscaped == False):
+
+    if (room == "ROOMNAME"):
+        if (isEntering):
+            # print the room description
+            isEntering = False
+        # Loop within the room, as long as player is not leaving, and alive    
+        while (isAlive == True and isEntering == False):
+            command = input("> ")
+            if (command == "go DIRECTION"):
+                # change the room, set flag that player is entering
+                room = "ROOMNAME"
+                isEntering = True
+            if (command == "look around" or "search room"):
+                # print description
+
+            if (command == "attack"):
+                # if there is something to attack, handle attack
+                # otherwise provide a witty statement
+            if (command == "take OBJECT"):
+                # check whether the object can be taken; if so take
+            if (command == "help") : showHelp()
+\end{lstlisting}
+
+Line 22 sets up the main \whileloop-loop. 
 
 
 
+
+
+ 
+ 
 
 
 

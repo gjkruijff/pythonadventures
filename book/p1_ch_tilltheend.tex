@@ -153,10 +153,10 @@ Next comes the next loop, within the room itself (line 29). As long as the playe
 
 If you look at the \texttt{if}-block for "go", you see how we escape from the room loop -- by going to another room! Depending on the direction and where the player decides to go, we set the \texttt{room} variable to the appropriate name (e.g. "go north" from the Hallway sets \texttt{room="Parlour"}) \emph{and} we set still true at this point), and then the new value for \texttt{room} gets us into the code block for a different room. Where the next room-specific \whileloop-loop then starts.      
 
-Ready? 
+Ready? Then let's get started! First, replace the "template" block (lines 24--43) with the following code for the Hallway. See you on the other side -- where we then look at the code in more detail.   
 
 \begin{lstlisting}[firstnumber=24]
-if (room == "Hallway"):
+    if (room == "Hallway"):
         if (isEntering):
             # print the room description
             print("You are in a dark, spooky house, all alone out in the forest.")
@@ -203,12 +203,76 @@ if (room == "Hallway"):
             if (command == "help") : showHelp()
 \end{lstlisting} 
 
+Well done, that was a lot of code! 
 
+The block for the Hallway starts in familiar fashion. After checking that the player is in the Hallway (line 24), we check whether the player has just entered -- if so, we print the room description for the hallway. After that, we enter the \whileloop-loop for the room. 
 
+At the beginning of the loop we let the player say what he wants to do next (line 33), and then we start checking. 
+
+The code first has several \texttt{if} blocks to check for directions. Look at the block in lines 34 through 36. If the player decides to go north, we change the room to "Parlour" (as that is north of the Hallway), and we set the flag \texttt{isEntering} to \texttt{True} -- the player is entering a new room after all. The block for going south works the same way, whereas the block for going east (staircase) basically tells the player that that is a very bad idea. 
+
+The block for going west (lines 44 through 55) does more. This is after all the main door, our way to escape! The \texttt{if..else} checks whether the player has found the main key, or not. Note that the \texttt{if} condition simply states \texttt{hasMainKey} rather than \texttt{hasMainKey}. In Python, these two are equal. If the player indeed has the key, we print the ending, and set the flag \texttt{hasEscaped} to \texttt{True}. This means now we no longer meet the condition for the main \whileloop-loop, thus effectively ending the game. On the other hand, no key means no escape. 
+
+Another new function we introduce here is \startswith. This function works for \strvar{s}, and checks (guess what) whether the \strvar\ starts with the text (\strvar) provided as argument. We use \startswith\ here for "attack" and for "take" -- there is nothing to attack or take here, so whatever the player tries, it fails, without us having to imagine what all the player may try doing here ... 
+
+Finally, look at how simple dealing with "help" now becomes (line 68). All we need is a call to the \texttt{showHelp()} function. 
+
+\begin{Exe}
+You can already run the code, and see for yourself what happens when you try to "take the golden key" or "attack the hideous hobgoblin." \expend
+\end{Exe}
+
+\noindent{}Next up, the Parlour. 
  
- 
+\begin{lstlisting}[firstnumber=last]
+    # Parlour
+    if (room == "Parlour"):
+        if (isEntering):
+            print("You go through the door, into the Parlour.")
+            print("Heavy curtains cover most of the windows. ")
+            print("It smells dusty here.")
+            print("There is a door to the west, which appears locked.")
+            isEntering = False
+        # Loop within the room, as long as player is not leaving, and alive
+        while (isAlive == True and isEntering == False):
+            command = input("> ")
+            if (command == "go north"):
+                print("You cannot go north.")
+                print("The wall seems pretty solid,")
+                print("you won't scratch it away with your fingernails.")
+            if (command == "go south"):
+                room = "Hallway"
+                isEntering = True
+            if (command == "go east"):
+                if (hasLibraryKey):
+                    room = "Library"
+                    isEntering = True
+                else:
+                    print("You try the door, which seems to go to the Library,")
+                    print("but you quickly notice it is really locked.")
+                    print("You do hear sighing sounds coming from behind the door,")
+                    print("yet until you have the key, you won't find out what causes them.")
+            if (command == "go west"):
+                print("You cannot go west.")
+                print("There are windows there, and they are all shut.")
+            if (command == "look around" or command == "search room"):
+                print("In the faint light, you see several chairs, and a coffee table.")
+                print("There is a key on the coffee table.")
+            if (command.startswith("attack")):
+                print("You wildly slash the air around you,")
+                print("whirling up the dust, causing you to cough heavily.")
+                print("This looks silly. There is nothing to attack.")
+            if (command == "take key"):
+                print("You take the key from the coffee table.")
+                print("Looking at it, you figure this may be the key to the Library.")
+                hasLibraryKey = True
+            if (command == "help") : showHelp()
+        # End while for Parlour
+    # End if checking whether Parlour
+\end{lstlisting}
 
+The code for the Parlour should look familiar by now. The only challenge is the door to the library. The player needs to find out that there is a key (e.g. "look around"), then take it (e.g. "take key"). Once the player has taken the key, we set the flag \texttt{hasLibraryKey} to \texttt{True}. After that, the player can go to the Library. 
 
+The Library  
 
 
 

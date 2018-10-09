@@ -134,7 +134,7 @@ while (isAlive == True and hasEscaped == False):
                 # change the room, set flag that player is entering
                 room = "ROOMNAME"
                 isEntering = True
-            if (command == "look around" or "search room"):
+            if (command == "look around" or command == "search room"):
                 # print description
 
             if (command == "attack"):
@@ -153,7 +153,55 @@ Next comes the next loop, within the room itself (line 29). As long as the playe
 
 If you look at the \texttt{if}-block for "go", you see how we escape from the room loop -- by going to another room! Depending on the direction and where the player decides to go, we set the \texttt{room} variable to the appropriate name (e.g. "go north" from the Hallway sets \texttt{room="Parlour"}) \emph{and} we set still true at this point), and then the new value for \texttt{room} gets us into the code block for a different room. Where the next room-specific \whileloop-loop then starts.      
 
+Ready? 
 
+\begin{lstlisting}[firstnumber=24]
+if (room == "Hallway"):
+        if (isEntering):
+            # print the room description
+            print("You are in a dark, spooky house, all alone out in the forest.")
+            print("There is only one door to the outside, and it is locked.")
+            print("You hear strange, creaky sounds.")
+            isEntering = False
+        # Loop within the room, as long as player is not leaving, and alive
+        while (isAlive == True and isEntering == False):
+            command = input("> ")
+            if (command == "go north"):
+                room = "Parlour"
+                isEntering = True
+            if (command == "go south"):
+                room = "DiningRoom"
+                isEntering = True
+            if (command == "go east"):
+                print("Sickly green water and stinking mud is flowing down the staircase.")
+                print("It looks like the water in the dark puddles at the bottom is moving.")
+                print("You decide it is probably safer not to set foot on those rotten steps.")
+            if (command == "go west"):
+                if (hasMainKey):
+                    print("With shaking hands you try putting the key into the lock,")
+                    print("All the while looking over your shoulder left and right,")
+                    print("to see whether there isn't another monster lurking in the dark.")
+                    print("With a dry click, and then a creaking sound, the door opens.")
+                    print("You are greated by a gale, slashing ice-cold rain on your face,")
+                    print("but at least you can leave this forsaken place.")
+                    hasEscaped = true
+                else:
+                    print("Franticly you rattle door, but it won't budge.")
+                    print("The door remains locked and closed.")
+            if (command == "look around" or command == "search room"):
+                print("You find yourself in the hallway.")
+                print("To the east is a winding staircase, on the verge of collapse.")
+                print("To the west is the door to the outside.")
+                print("You can go north, and south.")
+            if (command.startswith("attack")):
+                print("You wildly slash the air around you,")
+                print("until you see yourself in the mirror in the hallway.")
+                print("This looks silly. There is nothing to attack.")
+            if (command.startswith("take")):
+                print("Aside from some appalling mud, dust, and brackish water,")
+                print("there really isn't anything worth taking here.")
+            if (command == "help") : showHelp()
+\end{lstlisting} 
 
 
 

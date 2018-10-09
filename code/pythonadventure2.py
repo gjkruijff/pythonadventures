@@ -27,7 +27,7 @@ while (isAlive == True and hasEscaped == False):
         if (isEntering):
             # print the room description
             isEntering = False
-        # Loop within the room, as long as player is not leaving, and alive    
+        # Loop within the room, as long as player is not leaving, and alive
         while (isAlive == True and isEntering == False):
             command = input("> ")
             if (command == "go DIRECTION"):

@@ -1,2 +1,70 @@
 \chapter{Till The Bitter End} 
 
+\section{Introduction}
+
+In the last chapter we saw how our code gradually became ever more complex. The code reflected a very strict order in which the player had to perform the actions ("the right way -- and the only way"). Any divergence from that resulted in us having to introduce more and more \texttt{if}-statements to cover those alternatives. 
+
+Things became so complicated that we didn't even manage to get all the way to the end! So that is what we are going to do this chapter. We are going to refactor our code, (basically write a new program with bits from the old one), using two new constructions in Python: \textit{loops} and \textit{\function{s}}.
+
+A \function\ is, simply put, a block of code that is outside of your "main" program, and that you can call to do something. Especially when you have to do that something many times, implementing it as a \function\ is very useful. You only have to implement it once, rather than repeat the code at every point where you need it. And, if you need to make a change, you only need to make it once (namely in the function) -- rather than at every point where you are using that code! 
+
+We have used \function{s} in our code already as well: \texttt{print()} is one, \texttt{input()} another. The \texttt{print} function does something for us and that's it, whereas \texttt{input} does something too and then actually returns a result. 
+
+What is more, looking at our code, there is plenty of repetition there. A good example is handling "help." In principle the player can ask for help anytime he wants. However, it would be very cumbersome to include all the help text in our code, every time we need to handle "help." So that is a good candidate for a function!
+
+That brings us to \emph{loops}. 
+
+\section{Loops}
+
+A loop is a, literally, something that goes round. And round. And round. 
+
+Sometimes you have a block of code that needs to be repeated like that. And rather than copying-and-pasting it a zillion times, so that you can execute that code that many times, Python offers different ways to formulate loops in your code. 
+
+The kind of loop construction we use in this chapter mostly is the \whileloop\ loop. In a \whileloop\ loop we repeat a block of code, \textit{while} a certain condition holds: 
+
+\begin{lstlisting}
+while (...some condition...): 
+      #do something  
+\end{lstlisting}  
+
+For example, for our adventure game, we want to continue going \textit{while} the player is still alive, and has not yet escaped the house: 
+
+\begin{lstlisting}
+while (isAlive == True and hasEscaped == False): 
+      #do something  
+\end{lstlisting}  
+
+What is important to understand is that somewhere in the \texttt{\#do something} code block, these flags should change. At some point, the player should be able to escape, setting \texttt{hasEscaped} to \texttt{True}. At another point, the player may die an unfortunate death, setting \texttt{isAlive} to \texttt{False}. Why is that important? Because if the flags used in the condition would never ever change, then the loop would never end. You would end up with an \infiniteloop.
+
+\begin{Exp}[Break statements]
+Strictly speaking, you \emph{can} escape an infinite loop using a \breakloop\ statement within the loop.  
+
+\begin{lstlisting}
+while True: 
+      # do something
+      # if the conditions are right:
+      		break  
+\end{lstlisting}  
+
+
+
+
+\end{Exp}  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   

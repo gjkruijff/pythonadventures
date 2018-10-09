@@ -145,7 +145,13 @@ while (isAlive == True and hasEscaped == False):
             if (command == "help") : showHelp()
 \end{lstlisting}
 
-Line 22 sets up the main \whileloop-loop. 
+Line 22 sets up the main \whileloop-loop. We saw this one before: run the adventure as long as the player is alive, and hasn't escaped yet. Next, remember that earlier on (in line 13 -- how ominous!) we set up the \texttt{room} variable. We initialized it with the value \texttt{"Hallway"} as this is the room the player starts in. 
+
+Within the main \whileloop-loop we then check which room the player is currently in. Assume for the moment that line 24 reads \texttt{room == "Hallway"} so that we enter that block. Then the first check we make (line 25) is whether the player is \emph{entering} that room. Why? Well, only upon entering a room are we going to display the room description. As soon as we have done that, we set the flag \texttt{isEntering} to \texttt{False}. The player is now in the room. 
+
+Next comes the next loop, within the room itself (line 29). As long as the player is not leaving, and is still alive, we let him do whatever he wants (sort of). At the beginning of the loop, we get the next player command (line 30), and then we have several \texttt{if}-blocks to handle the various commands. 
+
+If you look at the \texttt{if}-block for "go", you see how we escape from the room loop -- by going to another room! Depending on the direction and where the player decides to go, we set the \texttt{room} variable to the appropriate name (e.g. "go north" from the Hallway sets \texttt{room="Parlour"}) \emph{and} we set still true at this point), and then the new value for \texttt{room} gets us into the code block for a different room. Where the next room-specific \whileloop-loop then starts.      
 
 
 

@@ -184,7 +184,7 @@ Ready? Then let's get started! First, replace the "template" block (lines 24--43
                     print("With a dry click, and then a creaking sound, the door opens.")
                     print("You are greated by a gale, slashing ice-cold rain on your face,")
                     print("but at least you can leave this forsaken place.")
-                    hasEscaped = true
+                    hasEscaped = True
                 else:
                     print("Franticly you rattle door, but it won't budge.")
                     print("The door remains locked and closed.")
@@ -332,10 +332,172 @@ The code for the Parlour should look familiar by now. The only challenge is the 
 
 The only way to get rid of the ghost is to attack it. The attack is handled in the block in lines 146 through 151. The player character isn't much of a hero, but it scares the ghost away, meaning we can now set \texttt{ghostPresent} to \texttt{False} (line 151). With the ghost away, the player can safely take the sword (lines 153-156), setting the flag \texttt{hasSword}. The sword comes in handy when we meet the Ghoul in the kitchen ... 
 
- 
+Now, to get to the kitchen, we need to go through the dining room. Below is the code. 
+
+\begin{lstlisting}[firstnumber=last]
+    # Dining room
+    if (room == "DiningRoom"):
+        if (isEntering):
+            # print the room description
+            print("Through the open double doors you enter the dining room.")
+            print("You see a large dining table in the center, with the sad remains of a past dinner.")
+            print("The chairs are all over the place, some fallen.")
+            print("A sickening, sweet smell hangs in the air, like something rotten.")
+            print("The kitchen is to the east, the hallway to the north.")
+            isEntering = False
+        # Loop within the room, as long as player is not leaving, and alive
+        while (isAlive == True and isEntering == False):
+            command = input("> ")
+            if (command == "go north"):
+                room = "Hallway"
+                isEntering = True
+            if (command == "go east"):
+                room = "Kitchen"
+                isEntering = True
+            if (command == "go west"):
+                print("You cannot go west.")
+                print("The windows a closed, covered by heavy curtains.")
+            if (command == "go south"):
+                print("Maybe 'it' is rapidly going south from here,")
+                print("But you certainly aren't.")
+            if (command == "look around" or command == "search room"):
+                print("You see tracks on the floor, going from a fallen chair to the kitchen.")
+                print("The tracks look like something heavy was dragged.")
+                print("You hear strange sounds coming from the kitchen.")
+                print("You can go north, and east to the kitchen.")
+            if (command.startswith("attack")):
+                if (hasSword == False):
+                    print("You wildly chop and kick around you,")
+                    print("until you see yourself in the mirror in the hallway.")
+                    print("This looks silly. There is nothing to attack.")
+                else:
+                    print("You swing the sword through the air,")
+                    print("and although the air is rather thick in here,")
+                    print("it looks like you are even thicker.")
+                    print("There is nothing to attack here.")
+            if (command.startswith("take")):
+                print("For a moment you inspect the broken dishes,")
+                print("and the unappealing morsels of rotten food,")
+                print("then you wisely decide there really isn't anything worth taking here.")
+            if (command == "help") : showHelp()
+        # End while block for room
+    # End if block for checking which room
+\end{lstlisting} 
+
+The code for the dining room should look familiar -- new story, yes, but no new constructions. You already know all that ... 
+
+So onto something new then, still -- "it's the final countdown!" 
+
+\begin{Exe} Sing along. At least for a minute. \end{Exe}
+
+Only one more room to go, namely the kitchen. 
+
+\begin{lstlisting}[firstnumber=last]
+    # Kitchen
+    if (room == "Kitchen"):
+        if (isEntering):
+            # print the room description
+            print("As you open the door to the kitchen, ")
+            print("an incredible stench assails your every sense.")
+            print("Amidst rotten food strewn across the kitchen floor,")
+            print("there sits a foul ghoul.")
+            ghoulPresent = True
+            isEntering = False
+        # Loop within the room, as long as player is not leaving, and alive
+        while (isAlive == True and isEntering == False):
+            command = input("> ")
+            if (command == "go north"):
+                print("There are kitchen cabinets to the north.")
+                print("They are too small for you to hide in.")
+                print("You cannot go north.")
+                if (ghoulPresent): print("Mind you, there is a ghoul in the kitchen.")
+            if (command == "go west"):
+                room = "DiningRoom"
+                isEntering = True
+            if (command == "go east"):
+                print("There is a heap of foul-smelling meat towards the end of the kitchen.")
+                if (ghoulPresent): print("Some of that takes the shape of a ghoul.")
+                print("No matter how much you'd like to, you cannot go west.")
+            if (command == "go south"):
+                print("You cannot go south either.")
+            if (command == "look around" or command == "search room"):
+                if (ghoulPresent):
+                    print("Towards the end of the kitchen, there is a ghoul,")
+                    print("Eyeing you suspiciously, while chomping on what seems to be an arm,")
+                    print("and covering a handbag that is hanging around its neck.")
+                if (ghoulPresent == False):
+                    print("What was once a ghoul is now a pile of despicably stinking muccus.")
+                    print("Somewhere amidst the gore, you see the handbag.")
+            if (command == "attack ghoul"):
+                if (hasSword == False):
+                    print("You wildly chop and kick around you,")
+                    print("but the ghoul really isn't impressed.")
+                    print("It burps loudly, and shows its teeth.")
+                    print("You may need clean underwear once this is over.")
+                else:
+                    print("You swing the sword through the air,")
+                    print("and with a fearsome cry you stumble towards the ghoul.")
+                    print("As you slip and slide across the bloody floor,")
+                    print("You trip over some half-eaten leg,")
+                    print("and while falling over, you manage to skewer the surprised ghoul.")
+                    print("The ghoul dies there and then, much to your own disbelief.")
+                    ghoulPresent = False
+            if (command == "take handbag"):
+                if (ghoulPresent == False):
+                    print("You see the handbag, and although you go all 'eeeeeuuwwww',")
+                    print("you use a large fork to pick it up.")
+                    print("Congratulations, you now have a handbag smeared with blood.")
+                    hasHandbag = True
+                else:
+                    print("Unsurprisingly, the ghoul is not at all bemused.")
+                    print("With her sharp claws covered in scraps of arm,")
+                    print("she pushes you away hard,")
+                    print("so hard that you slide all the way back to the dining room.")
+                    room = "DiningRoom"
+                    isEntering = True
+            if (command == "search handbag" or command == "look handbag"):
+                if (ghoulPresent == True):
+                    print("Well, the handbag is right there,")
+                    print("around the neck of the proud owner,")
+                    print("the ghoul.")
+                elif (ghoulPresent == False and hasHandbag == True):
+                    print("Overcoming your disgust and fear for more strange things,")
+                    print("you rummage through the handbag, and find the key to the main door,")
+                    print("and for a moment you think, 'of course, where else could it have been?'")
+                    hasMainKey = True
+                else:
+                    # else the ghoul is gone but you don't have the handbag yet
+                    print("The handbag is amidst the heap of rot that was once a ghoul.")
+                    print("No, you don't have it yet.")
+            if (command == "help") : showHelp()
+        # End while block for room
+    # End if block for checking which room
+\end{lstlisting} 
+
+The kitchen really brings a lot of things together. The player needs to have the sword to attack the ghoul, then take the handbag, before he can find the key to the door outside. This means setting and checking a number of flags, as you see. Nothing comes for free here! 
+
+It all culminates in the block starting at line 275. Maybe the player already has a faint suspicion that there might be more to that handbag then meets the (disgusted) eye... However, the ghoul is rather proud if it, it seems, so as long as the ghoul is there, "search handbag" only tells the player that, yes, there is a handbag and the ghoul has it. The player needs to defeat the ghoul first. This then results in \texttt{ghoulPresent} being \texttt{False} (line 261). Second, the player needs to take the handbag once the ghoul is dead (line 267). And then finally, if that all is true, "search handbag" results in the player finding the key. 
+
+That is what the \texttt{elif} does. The first \texttt{if} in line 276 checks for the presence of the ghoul. If the ghoul is dead, we skip to the next block, starting on line 280. We do want to check that the player has really taken the bag though! So we have an "else" but with a condition -- hence the \texttt{elif}. If the player has the bag, fine; otherwise, we skip to the final \texttt{else} block, subtly pointing out to the player what he may have to do still ...  
+
+There you go! All done! Make sure to stage and commit the latest version of your code to \texttt{git}. Then, run the adventure, and have fun! Can you get to the key, and escape this mansion of madness? 
+
+\begin{Exe}
+Even when you get to the end, and the code sets \texttt{hasEscaped} to \texttt{True}, you may notice that the game doesn't properly end. What would you need to add and where? (Look for that flag we just mentioned, hint hint...)   
+\end{Exe}
 
 
+\begin{Exe}
+Here is a couple of ideas you can explore in the code (after all is safe in \texttt{git}, just in case ...): 
+\begin{itemize}
+\item Where and how would you add "horizontal lines" to separate the descriptions of each scene? 
+\item What extra flag(s) could you introduce to change the description for the hallway when you enter it a second time (or a third, or a fourth...)? (Right now, you get the opening scene every time you pass through the hallway, which sounds a bit awkward.)  
+\item Where and how would you add another room? What if you would hide it behind a curtain ... what would the player have to do to discover it? 
+\item So far we didn't do much with the \texttt{isAlive} flag ... what would you need to change to have the ghoul kill the player, if he attacks the ghoul with his bare hands?
+\end{itemize}
+\end{Exe}
 
+Well done! Well, that was a lot of code. In the next chapter there is less typing to do, don't worry. We will look at how can make the interaction a bit more flexible, by making it possible for the player to say what he wants to do in more different ways (e.g. "go to the kitchen", "go kitchen", "walk to kitchen", etc.) You will learn more about functions.       
 
 
 

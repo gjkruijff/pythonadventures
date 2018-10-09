@@ -20,6 +20,12 @@ def showHelp():
     print("- 'attack' to attack a monster")
     print("- 'take' an object, e.g. 'take key' ")
 
+# Introduction
+print("-------------------------------------------------------------")
+print("The Haunted House On The Hill")
+print("(v2.0)")
+print("-------------------------------------------------------------")
+
 # Main loop - as long as the player is alive, and has not escaped, continue
 while (isAlive == True and hasEscaped == False):
 
@@ -27,6 +33,7 @@ while (isAlive == True and hasEscaped == False):
     if (room == "Hallway"):
         if (isEntering):
             # print the room description
+            print("-------------------------------------------------------------")
             print("You are in a dark, spooky house, all alone out in the forest.")
             print("There is only one door to the outside, and it is locked.")
             print("You hear strange, creaky sounds.")
@@ -52,7 +59,8 @@ while (isAlive == True and hasEscaped == False):
                     print("With a dry click, and then a creaking sound, the door opens.")
                     print("You are greated by a gale, slashing ice-cold rain on your face,")
                     print("but at least you can leave this forsaken place.")
-                    hasEscaped = true
+                    hasEscaped = True
+                    isEntering = True
                 else:
                     print("Franticly you rattle door, but it won't budge.")
                     print("The door remains locked and closed.")
@@ -75,6 +83,7 @@ while (isAlive == True and hasEscaped == False):
     # Parlour
     if (room == "Parlour"):
         if (isEntering):
+            print("-------------------------------------------------------------")
             print("You go through the door, into the Parlour.")
             print("Heavy curtains cover most of the windows. ")
             print("It smells dusty here.")
@@ -120,6 +129,7 @@ while (isAlive == True and hasEscaped == False):
     # Library
     if (room == "Library"):
         if (isEntering):
+            print("-------------------------------------------------------------")
             print("You unlock the door, and enter the Library.")
             print("You immediately notice the free floating full torso vaporous apparition.")
             print("In other words, there is a ghost.")
@@ -175,6 +185,7 @@ while (isAlive == True and hasEscaped == False):
     if (room == "DiningRoom"):
         if (isEntering):
             # print the room description
+            print("-------------------------------------------------------------")
             print("Through the open double doors you enter the dining room.")
             print("You see a large dining table in the center, with the sad remains of a past dinner.")
             print("The chairs are all over the place, some fallen.")
@@ -223,6 +234,7 @@ while (isAlive == True and hasEscaped == False):
     if (room == "Kitchen"):
         if (isEntering):
             # print the room description
+            print("-------------------------------------------------------------")
             print("As you open the door to the kitchen, ")
             print("an incredible stench assails your every sense.")
             print("Amidst rotten food strewn across the kitchen floor,")
@@ -237,10 +249,10 @@ while (isAlive == True and hasEscaped == False):
                 print("They are too small for you to hide in.")
                 print("You cannot go north.")
                 if (ghoulPresent): print("Mind you, there is a ghoul in the kitchen.")
-            if (command == "go east"):
+            if (command == "go west"):
                 room = "DiningRoom"
                 isEntering = True
-            if (command == "go west"):
+            if (command == "go east"):
                 print("There is a heap of foul-smelling meat towards the end of the kitchen.")
                 if (ghoulPresent): print("Some of that takes the shape of a ghoul.")
                 print("No matter how much you'd like to, you cannot go west.")
@@ -251,7 +263,7 @@ while (isAlive == True and hasEscaped == False):
                     print("Towards the end of the kitchen, there is a ghoul,")
                     print("Eyeing you suspiciously, while chomping on what seems to be an arm,")
                     print("and covering a handbag that is hanging around its neck.")
-                if (ghoulPresent = False):
+                if (ghoulPresent == False):
                     print("What was once a ghoul is now a pile of despicably stinking muccus.")
                     print("Somewhere amidst the gore, you see the handbag.")
             if (command == "attack ghoul"):

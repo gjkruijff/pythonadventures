@@ -170,3 +170,131 @@ while (isAlive == True and hasEscaped == False):
             if (command == "help") : showHelp()
         # End while for Library
     # End if checking whether Library
+
+    # Dining room
+    if (room == "DiningRoom"):
+        if (isEntering):
+            # print the room description
+            print("Through the open double doors you enter the dining room.")
+            print("You see a large dining table in the center, with the sad remains of a past dinner.")
+            print("The chairs are all over the place, some fallen.")
+            print("A sickening, sweet smell hangs in the air, like something rotten.")
+            print("The kitchen is to the east, the hallway to the north.")
+            isEntering = False
+        # Loop within the room, as long as player is not leaving, and alive
+        while (isAlive == True and isEntering == False):
+            command = input("> ")
+            if (command == "go north"):
+                room = "Hallway"
+                isEntering = True
+            if (command == "go east"):
+                room = "Kitchen"
+                isEntering = True
+            if (command == "go west"):
+                print("You cannot go west.")
+                print("The windows a closed, covered by heavy curtains.")
+            if (command == "go south"):
+                print("Maybe 'it' is rapidly going south from here,")
+                print("But you certainly aren't.")
+            if (command == "look around" or command == "search room"):
+                print("You see tracks on the floor, going from a fallen chair to the kitchen.")
+                print("The tracks look like something heavy was dragged.")
+                print("You hear strange sounds coming from the kitchen.")
+                print("You can go north, and east to the kitchen.")
+            if (command.startswith("attack")):
+                if (hasSword == False):
+                    print("You wildly chop and kick around you,")
+                    print("until you see yourself in the mirror in the hallway.")
+                    print("This looks silly. There is nothing to attack.")
+                else:
+                    print("You swing the sword through the air,")
+                    print("and although the air is rather thick in here,")
+                    print("it looks like you are even thicker.")
+                    print("There is nothing to attack here.")
+            if (command.startswith("take")):
+                print("For a moment you inspect the broken dishes,")
+                print("and the unappealing morsels of rotten food,")
+                print("then you wisely decide there really isn't anything worth taking here.")
+            if (command == "help") : showHelp()
+        # End while block for room
+    # End if block for checking which room
+
+    # Kitchen
+    if (room == "Kitchen"):
+        if (isEntering):
+            # print the room description
+            print("As you open the door to the kitchen, ")
+            print("an incredible stench assails your every sense.")
+            print("Amidst rotten food strewn across the kitchen floor,")
+            print("there sits a foul ghoul.")
+            ghoulPresent = True
+            isEntering = False
+        # Loop within the room, as long as player is not leaving, and alive
+        while (isAlive == True and isEntering == False):
+            command = input("> ")
+            if (command == "go north"):
+                print("There are kitchen cabinets to the north.")
+                print("They are too small for you to hide in.")
+                print("You cannot go north.")
+                if (ghoulPresent): print("Mind you, there is a ghoul in the kitchen.")
+            if (command == "go east"):
+                room = "DiningRoom"
+                isEntering = True
+            if (command == "go west"):
+                print("There is a heap of foul-smelling meat towards the end of the kitchen.")
+                if (ghoulPresent): print("Some of that takes the shape of a ghoul.")
+                print("No matter how much you'd like to, you cannot go west.")
+            if (command == "go south"):
+                print("You cannot go south either.")
+            if (command == "look around" or command == "search room"):
+                if (ghoulPresent):
+                    print("Towards the end of the kitchen, there is a ghoul,")
+                    print("Eyeing you suspiciously, while chomping on what seems to be an arm,")
+                    print("and covering a handbag that is hanging around its neck.")
+                if (ghoulPresent = False):
+                    print("What was once a ghoul is now a pile of despicably stinking muccus.")
+                    print("Somewhere amidst the gore, you see the handbag.")
+            if (command == "attack ghoul"):
+                if (hasSword == False):
+                    print("You wildly chop and kick around you,")
+                    print("but the ghoul really isn't impressed.")
+                    print("It burps loudly, and shows its teeth.")
+                    print("You may need clean underwear once this is over.")
+                else:
+                    print("You swing the sword through the air,")
+                    print("and with a fearsome cry you stumble towards the ghoul.")
+                    print("As you slip and slide across the bloody floor,")
+                    print("You trip over some half-eaten leg,")
+                    print("and while falling over, you manage to skewer the surprised ghoul.")
+                    print("The ghoul dies there and then, much to your own disbelief.")
+                    ghoulPresent = False
+            if (command == "take handbag"):
+                if (ghoulPresent == False):
+                    print("You see the handbag, and although you go all 'eeeeeuuwwww',")
+                    print("you use a large fork to pick it up.")
+                    print("Congratulations, you now have a handbag smeared with blood.")
+                    hasHandbag = True
+                else:
+                    print("Unsurprisingly, the ghoul is not at all bemused.")
+                    print("With her sharp claws covered in scraps of arm,")
+                    print("she pushes you away hard,")
+                    print("so hard that you slide all the way back to the dining room.")
+                    room = "DiningRoom"
+                    isEntering = True
+            if (command == "search handbag" or command == "look handbag"):
+                if (ghoulPresent == True):
+                    print("Well, the handbag is right there,")
+                    print("around the neck of the proud owner,")
+                    print("the ghoul.")
+                elif (ghoulPresent == False and hasHandbag == True):
+                    print("Overcoming your disgust and fear for more strange things,")
+                    print("you rummage through the handbag, and find the key to the main door,")
+                    print("and for a moment you think, 'of course, where else could it have been?'")
+                    hasMainKey = True
+                else:
+                    # else the ghoul is gone but you don't have the handbag yet
+                    print("The handbag is amidst the heap of rot that was once a ghoul.")
+                    print("No, you don't have it yet.")
+            if (command == "help") : showHelp()
+        # End while block for room
+    # End if block for checking which room

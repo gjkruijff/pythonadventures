@@ -330,7 +330,9 @@ The code for the Parlour should look familiar by now. The only challenge is the 
 
 \noindent{The} code for the Library has a bit more to it. As we have a monster here (a ghost), we introduce a flag \texttt{ghostPresent} in line 120 to track its presence. As long as the ghost is there, the player cannot take the sword (see below). Moreover, the game kindly reminds the player that there \emph{is} (still) a ghost whenever he looks around, or tries going in some direction other than back to the Parlour (see lines 128, 132, 136, and 145).   
 
-The only way to get rid of the ghost is to attack it. The attack is handled in the block in lines 146 through 151. The player character isn't much of a hero, but it scares the ghost away, meaning we can now set \texttt{ghostPresent} to \texttt{False} (line 151). 
+The only way to get rid of the ghost is to attack it. The attack is handled in the block in lines 146 through 151. The player character isn't much of a hero, but it scares the ghost away, meaning we can now set \texttt{ghostPresent} to \texttt{False} (line 151). With the ghost away, the player can safely take the sword (lines 153-156), setting the flag \texttt{hasSword}. The sword comes in handy when we meet the Ghoul in the kitchen ... 
+
+ 
 
 
 

@@ -1,11 +1,9 @@
 import wx
 
-class ExampleFrame(wx.Frame):
+class ExamplePanel(wx.Panel):
     def __init__ (self, parent):
-        wx.Frame.__init__(self, parent)
-        panel = wx.Panel(self)
-        self.quote = wx.StaticText(panel, label = "Your quote: Go fast and break stuff", pos=(20,30))
-        self.Show()
+        wx.Panel.__init__(self, parent)
+        self.quote = wx.StaticText(self, label = "Your quote: Go fast and break stuff", pos=(20,30))
 
         # A multiline TextCtrl (again)
         self.logger = wx.TextCtrl(self, pos=(300,20), size = (200,300), style=wx.TE_MULTILINE | wx.TE_READONLY)
@@ -33,7 +31,7 @@ class ExampleFrame(wx.Frame):
 
         # Radio boxes
         radioList = ['blue', 'red', 'yellow', 'orange', 'green', 'purple', 'navy blue']
-        rb = wx.RadioBox(self, label="what color would you like?", pos=(20,210), choices=radioList, mahorDimension=3, style=wx.RA_SPECIFY_COLS)
+        rb = wx.RadioBox(self, label="what color would you like?", pos=(20,210), choices=radioList, majorDimension=3, style=wx.RA_SPECIFY_COLS)
         self.Bind(wx.EVT_RADIOBOX, self.EvtRadioBox, rb)
 
     def EvtRadioBox(self, event): self.logger.AppendText('EvtRadioBox: %d\n' % event.GetInt())
@@ -48,14 +46,6 @@ class ExampleFrame(wx.Frame):
 
 app = wx.App(False)
 frame = wx.Frame(None)
-
 panel = ExamplePanel(frame)
 frame.Show()
-app.MainLoop()
-
-
-
-
-app = wx.App(False)
-ExampleFrame(None)
 app.MainLoop()

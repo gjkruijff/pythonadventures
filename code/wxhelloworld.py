@@ -23,7 +23,7 @@ class HelloFrame(wx.Frame):
         fileMenu = wx.Menu()
         helloItem = fileMenu.Append(-1, "&Hello...\tCtrl-H", "Help string shown in status bar for this menu item")
         fileMenu.AppendSeparator()
-        exitItem = fileMenu.Append(wx.ID_EXIT)
+        exitItem = fileMenu.Append(wx.ID_EXIT) ## somehow this doesn't show ... 
 
         helpMenu = wx.Menu()
         aboutItem = helpMenu.Append(wx.ID_ABOUT)

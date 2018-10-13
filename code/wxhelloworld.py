@@ -4,7 +4,7 @@ import wx
 
 class HelloFrame(wx.Frame):
 
-    def __init__ (sefl, *args, **kw):
+    def __init__ (self, *args, **kw):
         super(HelloFrame, self).__init__(*args, **kw)
         pnl = wx.Panel(self)
 
@@ -21,7 +21,7 @@ class HelloFrame(wx.Frame):
 
     def makeMenuBar(self):
         fileMenu = wx.Menu()
-        helloItem = fileMenu.append(-1, "&Hello...\tCtrl-H", "Help string shown in status bar for this menu item")
+        helloItem = fileMenu.Append(-1, "&Hello...\tCtrl-H", "Help string shown in status bar for this menu item")
         fileMenu.AppendSeparator()
         exitItem = fileMenu.Append(wx.ID_EXIT)
 
